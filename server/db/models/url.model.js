@@ -1,16 +1,15 @@
-const { Schema, model } = require('mongoose')
+// const { Schema, model } = require('mongoose')
+const mongoose = require('mongoose')
 
-const urlSchema = new Schema({
+const urlSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
   },
-  originUrl: {
+  url: {
     type: String,
     required: true
   }
 })
 
-module.exports = {
-  urls: model('urls', urlSchema)
-}
+module.exports = mongoose.model('urls', urlSchema)
