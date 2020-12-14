@@ -1,12 +1,15 @@
 const app = require('./app')
-const db = require('../db/db')
+const database = require('../db/db')
 const PORT = process.env.PORT || 3000
 
 const startServer = async () => {
-  await db.createDbConnection()
+  const db = await database.createDbConnection()
 
-  app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`)
+  db.on('open', () => {
+    // Start app when db connection is ready
+    app.listen(PORT, () => {
+      console.log(`🚀 Server listening on port ${PORT}`)
+    })
   })
 }
 
